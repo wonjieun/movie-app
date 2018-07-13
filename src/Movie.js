@@ -22,7 +22,7 @@ class Movie extends Component {
 class MoviePoster extends Component {
     render() {
         return (
-            <img src={this.props.poster} alt="movieList"/>
+            <img src={this.props.poster} alt="moviePoster"/>
         );
     }
   }
