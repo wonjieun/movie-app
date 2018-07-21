@@ -2,60 +2,56 @@ import React, { Component } from 'react';
 import './App.css';
 import Movie from './Movie';
 
-const movies = [
-  {
-    title: "Avengers",
-    poster: "http://www.futurerulerofmidgard.com/wp-content/uploads/2018/03/avengers-infinity-war-poster.jpg"
-  },
-  {
-    title: "Harry Potter",
-    poster: "https://mvpo.us/img/P5159.jpg"
-  },
-  {
-    title: "Jurassic World",
-    poster: "https://www.bleedingcool.com/wp-content/uploads/2018/04/jurassic-world-poster.jpg"
-  },
-  {
-    title: "Spider-Man",
-    poster: "http://cdn.collider.com/wp-content/uploads/amazing-spider-man-movie-poster.jpg"
-  }
-]
-
 class App extends Component {
   // Render: componentWillMount() -> render() -> componentDidMount()
   // Update componentWillReceiveProps() -> shouldComponentUpdate() == true -> componentWillUpdate() -> render() -> componentDidUpdate()
 
   state = {
-    greeting: 'Hello!'
+    greeting: 'Hello!',
+    movies: [
+      {
+        title: "Avengers",
+        poster: "http://www.futurerulerofmidgard.com/wp-content/uploads/2018/03/avengers-infinity-war-poster.jpg"
+      },
+      {
+        title: "Harry Potter",
+        poster: "https://mvpo.us/img/P5159.jpg"
+      },
+      {
+        title: "Jurassic World",
+        poster: "https://www.bleedingcool.com/wp-content/uploads/2018/04/jurassic-world-poster.jpg"
+      },
+      {
+        title: "Spider-Man",
+        poster: "http://cdn.collider.com/wp-content/uploads/amazing-spider-man-movie-poster.jpg"
+      }
+    ]
   }
-
-  componentWillMount() {
-    console.log('will mount')
-  }
-
-  // greeting 렌더링을 setState에서 한다.
-  // state는 컴포넌트를 로드하는 방법이고
-  // 컴포넌트가 DidMount했을 때 (componentDidMount()), 5초 후에 Hello aging!이 되도록 명령
-
-  // state를 업데이트할 때는 setState를 이용
-  // 업데이트할 때마다 새로운 state와 함께 render가 작동
 
   componentDidMount() {
-    console.log('did mount')
+    // setTimeout(function() {  // old JavaScript
     setTimeout(() => {
-      // this.state.greeting = 'something' -> state를 직접적으로 변경하면 render설정들 (위에 Render 주석)이 작동을 하지 않음
+      // console.log('hello')
       this.setState({
-        greeting: 'Hello again!'
+        movies: [
+          ...this.state.movies,  // leave what the array had before, add one more
+          // // replaced all movies with the last one
+         {
+           title: "Incredibles",
+           poster: "http://oyster.ignimgs.com/wordpress/stg.ign.com/2018/04/incredibles.jpg"
+         },
+
+        ]
       })
-    }, 2000)
+    }, 5000)
+
   }
 
   render() {
-    console.log('did render')
     return (
       <div className="App">
         {this.state.greeting}
-        {movies.map((movie, index) => {
+        {this.state.movies.map((movie, index) => {
           return <Movie title={movie.title} poster={movie.poster} key={index} />
         })}
       </div>
